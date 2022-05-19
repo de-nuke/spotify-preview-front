@@ -21,13 +21,14 @@ class InputForm extends React.Component {
         try {
             url = this.validateUrl(url);
             this.setState({url: url});
+            this.formSubmitCallback({url: url});
         } catch (exception) {
             if (exception instanceof ValidationError){
-                console.log(exception.message);
                 this.setState({error: exception.message});
-            } else throw exception;
+            } else {
+                throw exception;
+            }
         }
-        this.formSubmitCallback({url: url});
     }
 
     onInputChange = (e) => {

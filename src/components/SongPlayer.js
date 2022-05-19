@@ -7,12 +7,14 @@ const RealSongPlayer = (props) => (
             <img src={props.songData.image_url}
                  alt=""/>
             <div className="uk-position-top-left">
-                <img src={spotifyLogo} alt="Spotify's logo"/>
-                <div className="uk-badge uk-animation-slide-right-small">Listen on Spotify</div>
+                <a href={props.songData.url} target={"_blank"}><img src={spotifyLogo} alt="Spotify's logo"/>
+                <div className="uk-badge uk-animation-slide-right-small">Listen on Spotify</div></a>
             </div>
             <div className="uk-position-top-right">
-                    <span data-uk-icon="icon: close; ratio: 1.5" className="uk-light"
-                          style={{cursor: "pointer"}}></span>
+                    <span data-uk-icon="icon: close; ratio: 1.5"
+                          className="uk-light"
+                          style={{cursor: "pointer", filter: "drop-shadow(1px 1px 1px rgb(0 0 0 / 0.6))"}}>
+                    </span>
             </div>
         </div>
         <div className="uk-background-default uk-padding-small">
