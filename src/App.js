@@ -1,7 +1,7 @@
 import './App.css';
 import Header from "./components/Header";
 import InputForm from "./components/InputForm";
-import SongCard from "./components/SongCard";
+import SongPlayerContainer from "./components/SongPlayerContainer";
 import React from "react";
 
 const API_BASE = "https://cl5qtr94ti.execute-api.eu-central-1.amazonaws.com/test/preview/";
@@ -30,7 +30,7 @@ class App extends React.Component {
     }
 
     onCloseCard = (e) => {
-        // this.setState({songData: null});
+        this.setState({songData: null});
     }
 
     render() {
@@ -39,11 +39,9 @@ class App extends React.Component {
                 <div className="uk-container uk-container-small uk-padding">
                     <Header text="Paste Spotify song URL and get a preview."/>
                     <InputForm onSubmit={this.handleFormSubmit.bind(this)}/>
-                    {(this.state.songData || this.state.isLoading) &&
-                        <SongCard songData={this.state.songData}
-                                  isLoading={this.state.isLoading}
-                                  onClose={this.onCloseCard}/>
-                    }
+                    <SongPlayerContainer songData={this.state.songData}
+                                         isLoading={this.state.isLoading}
+                                         onClose={this.onCloseCard}/>
                 </div>
             </div>
         );
