@@ -3,7 +3,8 @@ import spotifyLogo from "../images/icons8-spotify.svg"
 
 const RealSongPlayer = (props) => (
     <>
-        <div className="uk-background-default uk-cover-container" style={{minWidth: "300px", minHeight: "300px"}}>
+        <div className="uk-background-default uk-cover-container"
+             style={{minWidth: "300px", minHeight: "300px"}}>
             <img src={props.songData.image_url}
                  alt=""/>
             <div className="uk-position-top-left">
@@ -13,7 +14,8 @@ const RealSongPlayer = (props) => (
             <div className="uk-position-top-right">
                     <span data-uk-icon="icon: close; ratio: 1.5"
                           className="uk-light"
-                          style={{cursor: "pointer", filter: "drop-shadow(1px 1px 1px rgb(0 0 0 / 0.6))"}}>
+                          style={{cursor: "pointer", filter: "drop-shadow(1px 1px 1px rgb(0 0 0 / 0.6))"}}
+                          onClick={props.onClose}>
                     </span>
             </div>
         </div>
@@ -69,7 +71,8 @@ const SongPlayer = (props) => (
                     </>
                 )
                 :
-                <RealSongPlayer songData={props.songData}/>
+                <RealSongPlayer songData={props.songData}
+                                onClose={props.onClose}/>
             }
         </div>
         {props.isLoading && (

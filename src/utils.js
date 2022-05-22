@@ -1,3 +1,5 @@
+import React from "react";
+
 export function isValidHttpUrl(string) {
     let pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
     '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
@@ -6,4 +8,11 @@ export function isValidHttpUrl(string) {
     '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
     '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
     return !!pattern.test(string);
+}
+
+export const utilizeFocus = () => {
+    const ref = React.createRef()
+    const setFocus = () => {ref.current &&  ref.current.focus()}
+
+    return {setFocus, ref}
 }

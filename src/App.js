@@ -29,6 +29,10 @@ class App extends React.Component {
         })
     }
 
+    onCloseCard = (e) => {
+        // this.setState({songData: null});
+    }
+
     render() {
         return (
             <div className="App">
@@ -36,7 +40,9 @@ class App extends React.Component {
                     <Header text="Paste Spotify song URL and get a preview."/>
                     <InputForm onSubmit={this.handleFormSubmit.bind(this)}/>
                     {(this.state.songData || this.state.isLoading) &&
-                        <SongCard songData={this.state.songData} isLoading={this.state.isLoading}/>
+                        <SongCard songData={this.state.songData}
+                                  isLoading={this.state.isLoading}
+                                  onClose={this.onCloseCard}/>
                     }
                 </div>
             </div>

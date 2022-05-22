@@ -1,7 +1,7 @@
 import Input from "./Input";
 import FormButtons from "./FormButtons";
 import React from "react";
-import {isValidHttpUrl} from "../utils";
+import {isValidHttpUrl, utilizeFocus} from "../utils";
 
 class ValidationError extends Error {}
 
@@ -12,6 +12,7 @@ class InputForm extends React.Component {
             url: "",
             error: "",
         }
+        this.inputFocus = utilizeFocus();
         this.formSubmitCallback = props.onSubmit;
     }
 
@@ -35,6 +36,11 @@ class InputForm extends React.Component {
         this.setState({url: e.target.value, error: ""});
     }
 
+    onInputClear = (e) => {
+        this.setState({url: "", error: ""});
+        this.inputFocus.setFocus();
+    }
+
     validateUrl(url) {
         // 1. Remove all whitespaces
         url = url.replace(/\s/g, "");
@@ -56,7 +62,9 @@ class InputForm extends React.Component {
                 <Input
                     value={this.state.url}
                     onChange={this.onInputChange}
-                    error={this.state.error}/>
+                    error={this.state.error}
+                    onClear={this.onInputClear}
+                    inputRef={this.inputFocus.ref}/>
                 <FormButtons onClick={this.onClickButton}/>
             </form>
         )
