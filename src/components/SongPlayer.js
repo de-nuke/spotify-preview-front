@@ -1,4 +1,51 @@
 import spotifyLogo from "../images/icons8-spotify.svg"
+import React from "react";
+
+
+class AudioControls extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            trackProgress: 0,
+            isPlaying: false,
+            audio: new Audio(props.audioSrc)
+        };
+    }
+
+    handlePlayPause = (event) => {
+        if (this.state.isPlaying) this.pause();
+        else this.play();
+    }
+
+    pause(){
+        this.state.audio.pause();
+        this.setState({isPlaying: false});
+    }
+
+    play(){
+        this.state.audio.play();
+        this.setState({isPlaying: true});
+    }
+
+    getPlayPauseIcon(){
+        let iconName;
+        if (this.state.isPlaying){
+            iconName = "pause";
+        } else {
+            iconName = "play"
+        }
+        return "icon: " + iconName + "; ratio: 2.5";
+    }
+
+    render() {
+        return (
+            <div className="uk-flex">
+                <span className="uk-inline uk-width-1-5" data-uk-icon={this.getPlayPauseIcon()} onClick={this.handlePlayPause}></span>
+                <input className="uk-range uk-inline uk-width-4-5" type="range" min="0" max="10" step="0.1"/>
+            </div>
+        );
+    }
+}
 
 
 const RealSongPlayer = (props) => (
@@ -25,10 +72,7 @@ const RealSongPlayer = (props) => (
                 <h5 className="uk-margin-remove">{props.songData.description}</h5>
             </div>
             <div className="">
-                <div className="uk-flex">
-                    <span className="uk-inline uk-width-1-5" data-uk-icon="icon: play; ratio: 2.5"></span>
-                    <input className="uk-range uk-inline uk-width-4-5" type="range" min="0" max="10" step="0.1"/>
-                </div>
+                <AudioControls audioSrc={props.songData.audio_url}/>
             </div>
         </div>
     </>
