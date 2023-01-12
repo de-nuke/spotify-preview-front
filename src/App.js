@@ -1,7 +1,7 @@
 import './App.css';
 import Header from "./components/Header";
 import InputForm from "./components/InputForm";
-import SongPlayerContainer from "./components/SongPlayerContainer";
+import SongPlayerContainer from "./components/Player";
 import React from "react";
 
 const API_BASE = "https://cl5qtr94ti.execute-api.eu-central-1.amazonaws.com/test/preview/";

@@ -16,6 +16,14 @@ class InputForm extends React.Component {
         this.formSubmitCallback = props.onSubmit;
     }
 
+    componentDidMount() {
+        // window.addEventListener("focus", this.onFocus);
+    }
+
+    componentWillUnmount() {
+        // window.removeEventListener("focus", this.onFocus);
+    }
+
     onClickButton = (e) => {
         e.preventDefault();
         let url = this.state.url;
