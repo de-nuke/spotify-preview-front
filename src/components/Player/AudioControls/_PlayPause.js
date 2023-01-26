@@ -1,11 +1,11 @@
-import {CiPause1, CiPlay1} from "react-icons/ci";
+import {BsPlay, BsPause} from "react-icons/bs";
 import React from "react";
 
 export default function PlayPause(props){
     return (
         props.isPlaying ?
-            <CiPause1 onClick={props.onClick} size="2rem"/>
+            <BsPause onClick={props.onClick} size="2.5rem" style={{cursor: "pointer"}}/>
             :
-            <CiPlay1 onClick={props.onClick} size="2rem"/>
+            <BsPlay onClick={props.onClick} size="2.5rem" style={{cursor: "pointer"}}/>
     )
 }

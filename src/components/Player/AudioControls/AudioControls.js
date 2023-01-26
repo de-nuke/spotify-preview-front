@@ -9,7 +9,9 @@ class AudioControls extends React.Component {
     constructor(props) {
         super(props);
         let audio = new Audio(props.audioSrc);
-        audio.volume = 0.01;
+        audio.volume = 1;
+        audio.onended = this.onEnded.bind(this);
+
         this.state = {
             trackProgress: 0,
             isPlaying: false,
@@ -22,7 +24,9 @@ class AudioControls extends React.Component {
     startProgressBar(){
         this.stopProgressBar();
         this.interval = setInterval(()=>{
-            this.setState({trackProgress: this.state.audio.currentTime});
+            if (this.state.isPlaying) {
+                this.setState({trackProgress: this.state.audio.currentTime});
+            }
         }, 1000)
     }
 
@@ -67,6 +71,12 @@ class AudioControls extends React.Component {
         this.setState({volume: volumeLevel});
     }
 
+    onEnded(){
+        this.pause();
+        this.startProgressBar();
+        this.setState({trackProgress: 0});
+    }
+
     render() {
         return (
             <div className="uk-flex" style={{marginTop: "10px"}}>
@@ -75,6 +85,7 @@ class AudioControls extends React.Component {
                     progress={this.state.trackProgress}
                     duration={this.state.audio.duration}
                     onChange={this.onScrub}
+                    onEnded={this.onEnded}
                 />
                 <Volume level={this.state.volume} onChange={this.changeVolume}/>
             </div>

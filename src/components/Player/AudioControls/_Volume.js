@@ -1,18 +1,28 @@
-import {CiVolumeHigh} from "react-icons/ci";
+import {BsVolumeOff, BsVolumeDown, BsVolumeUp, BsVolumeMute} from "react-icons/bs";
 import React from "react";
+
+
+function chooseVolumeIcon(level){
+    if (level > 0.5) {
+        return <BsVolumeUp size="2.5em"/>
+    } else if (level > 0.1) {
+        return <BsVolumeDown size="2.5em"/>
+    } else {
+        return <BsVolumeOff size="2.5em"/>
+    }
+}
+
 
 export default function Volume({level, onChange}){
 
     return (
         <>
-            {/*<div><input type="range" width="5px" height="100px" /></div>*/}
             <div style={{width: "30px"}} id="volume-container">
                 <div id="volume-button" style={{paddingTop: "10px", marginTop: "-10px", cursor: "pointer"}}>
-                    <CiVolumeHigh size="2em" onClick={(e) => onChange(0)}/>
+                    {chooseVolumeIcon(level)}
                 </div>
                 <div id="volume-slider"
                     style={{
-                    // display: "none",
                     paddingTop: "5px",
                     paddingBottom: "5px",
                     position: "absolute",
@@ -20,9 +30,17 @@ export default function Volume({level, onChange}){
                     backgroundColor: "white",
                     width: "30px",
                     border: "1px solid lightgray",
-                    borderRadius: "15px"
+                    borderRadius: "3px"
                 }}>
-                    <input className="uk-range uk-inline " type="range" min="-100" max="100" step="10" orient="vertical"/>
+                    <input className="uk-range uk-inline "
+                           value={level || 1}
+                           type="range"
+                           min="0"
+                           max="1"
+                           step="0.05"
+                           orient="vertical"
+                           onChange={event => onChange(event.target.value)}
+                    />
                 </div>
             </div>
         </>
